@@ -4,6 +4,8 @@ import org.usfirst.frc1277.Robot2016.RobotMap;
 import org.usfirst.frc1277.Robot2016.commands.SwingArmCommand;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +21,7 @@ public class SwingArm extends Subsystem {
 	private final SpeedController motor = RobotMap.swingArmMotor;
 	private final DigitalInput limitSwitch = RobotMap.swingArmSwitch;
 	private final Encoder encoder = RobotMap.swingArmEncoder;
+	private final Relay solenoids = RobotMap.solenoids;
 	
 	public void setMotor(double value) {
 		
@@ -35,6 +38,10 @@ public class SwingArm extends Subsystem {
 		}
 	}
 	
+	public void setSolenoids(boolean state) {
+		solenoids.set(state ? Value.kOn : Value.kOff);
+	}
+	
 	public boolean getSwitch() {
 		return limitSwitch.get();
 	}
@@ -45,15 +52,6 @@ public class SwingArm extends Subsystem {
 	
 	public int getEncoder() {
 		return encoder.get();
-	}
-	
-	public void reset() {
-		
-		while (limitSwitch.get()) {
-			motor.set(-0.75);
-		}
-		motor.set(0);
-		encoder.reset();
 	}
 	
     public void initDefaultCommand() {

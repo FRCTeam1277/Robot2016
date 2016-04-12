@@ -21,6 +21,7 @@ public class ResetSwingArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.swingArm.setSolenoids(true);
     	
     	Robot.swingArm.setMotor(-0.75);
     }
@@ -32,6 +33,8 @@ public class ResetSwingArm extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	// Leave solenoids on
+    	
     	Robot.swingArm.resetEncoder();
     	Robot.swingArm.setMotor(0);
     }

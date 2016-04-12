@@ -35,10 +35,12 @@ public class AutonomousCommandGroup extends CommandGroup {
     	SmartDashboard.putBoolean("Switch 2", switch2.get());
     	if (!switch1.get() && !switch2.get()) {}
     	else if (switch1.get() && !switch2.get()) {
-        	addSequential(new ResetSwingArm());
+        	// Run this for at most 2 seconds - handles case when limit switch is not triggered
+        	addSequential(new ResetSwingArm(), 2);
         	//addSequential(new ResetElbow());
         	// addSequential(new ResetShoulder());
-        	addSequential(new DriveDistance(132)); 
+        	// Run this for at most 5 seconds - handles case when encoder browns out
+        	addSequential(new DriveDistance(132), 5); 
     	} else if (!switch1.get() && switch2.get()) {
         	//addSequential(new ResetSwingArm());
         	//addSequential(new DriveDistance(39));
