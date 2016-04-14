@@ -2,9 +2,7 @@ package org.usfirst.frc1277.Robot2016.commands;
 
 import org.usfirst.frc1277.Robot2016.OI;
 import org.usfirst.frc1277.Robot2016.Robot;
-import org.usfirst.frc1277.Robot2016.RobotMap;
 
-import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -12,10 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class SwingArmCommand extends Command {
-
-	boolean previous5;
-	boolean current5;
-	boolean solenoidsOn;
 
     public SwingArmCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -25,24 +19,19 @@ public class SwingArmCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	previous5 = false;
-    	current5 = false;
-    	
-    	// Read actual state of solenoids rather than just assuming what state they are in
-    	solenoidsOn = RobotMap.solenoids.get() == Value.kOn;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	previous5 = current5;
-    	current5 = OI.joystick.getRawButton(5);
     	
-    	if (current5 && !previous5) {
-    		solenoidsOn = !solenoidsOn;
-    		
-        	Robot.swingArm.setSolenoids(solenoidsOn);        	
+    	if (OI.joystick.getRawButton(5)) {
+    		Robot.swingArm.setSolenoids(true);
     	}
-
+    	
+    	if (OI.joystick.getRawButton(7)) {
+    		Robot.swingArm.setSolenoids(false);
+    	}
+   	
     	if (OI.joystick.getRawButton(1)) {
     		Robot.swingArm.setMotor(0.75);
     	} else if (OI.joystick.getRawButton(3)) {
@@ -51,7 +40,7 @@ public class SwingArmCommand extends Command {
     		Robot.swingArm.setMotor(0);
     	}
     	
-    	SmartDashboard.putString("Solenoids: ", RobotMap.solenoids.get() == Value.kOn ? "On" : "Off");
+    	SmartDashboard.putString("Solenoids", Robot.swingArm.getSolenoids() ? "On" : "Off");
     }
 
     // Make this return true when this Command no longer needs to run execute()

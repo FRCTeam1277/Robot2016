@@ -42,6 +42,10 @@ public class SwingArm extends Subsystem {
 		solenoids.set(state ? Value.kOn : Value.kOff);
 	}
 	
+	public boolean getSolenoids() {
+		return solenoids.get() == Value.kOn;
+	}
+	
 	public boolean getSwitch() {
 		return limitSwitch.get();
 	}

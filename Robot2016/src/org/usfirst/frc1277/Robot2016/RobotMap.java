@@ -19,8 +19,6 @@ public class RobotMap {
 
     public static SpeedController driveTrainrightMotor;
     public static SpeedController driveTrainleftMotor;
-    public static SpeedController articulatingArmShoulder;
-    public static SpeedController articulatingArmElbow;
     public static SpeedController swingArmMotor;
     
     public static Relay solenoids;
@@ -28,12 +26,8 @@ public class RobotMap {
     
     public static Encoder leftEncoder;
     public static Encoder rightEncoder;
-    public static Encoder shoulderEncoder;
-    public static Encoder elbowEncoder;
     public static Encoder swingArmEncoder;
     
-    public static DigitalInput shoulderSwitch;
-    public static DigitalInput elbowSwitch;
     public static DigitalInput swingArmSwitch;
     public static DigitalInput autonomousSwitch1;
     public static DigitalInput autonomousSwitch2;
@@ -58,19 +52,6 @@ public class RobotMap {
         LiveWindow.addSensor("Drive Train", "Left Encoder", (Encoder) leftEncoder);
         driveTrainRobotDrive = new RobotDrive(driveTrainleftMotor, driveTrainrightMotor);
         
-//        articulatingArmShoulder = new VictorSP(2);
-//        LiveWindow.addActuator("Articulating Arm", "Shoulder Motor", (VictorSP) articulatingArmShoulder);
-//        shoulderEncoder = new Encoder(2, 3);
-//        LiveWindow.addSensor("Articulating Arm", "Shoulder Encoder", (Encoder) shoulderEncoder);
-//        shoulderSwitch = new DigitalInput(7);
-//        LiveWindow.addSensor("Articulating Arm", "Shoulder Limit Switch", (DigitalInput) shoulderSwitch);
-//        articulatingArmElbow = new VictorSP(4);
-//        LiveWindow.addActuator("Articulating Arm", "Elbow Motor", (VictorSP) articulatingArmElbow);
-//        elbowEncoder = new Encoder(4, 5);
-//        LiveWindow.addSensor("Articulating Arm", "Elbow Encoder", (Encoder) elbowEncoder);
-//        elbowSwitch = new DigitalInput(8);
-//        LiveWindow.addSensor("Articulating Arm", "Elbow Limit Switch", (DigitalInput) elbowSwitch);
-        
         swingArmMotor = new VictorSP(3);
         LiveWindow.addActuator("Swing Arm", "Motor", (VictorSP) swingArmMotor);
         swingArmEncoder = new Encoder(0, 1);
@@ -78,7 +59,8 @@ public class RobotMap {
         swingArmSwitch = new DigitalInput(6);
         LiveWindow.addSensor("Swing Arm", "Limit Switch", (DigitalInput) swingArmSwitch);
         
-        solenoids = new Relay(2, Relay.Direction.kForward);
+        solenoids = new Relay(1, Relay.Direction.kForward);
+        LiveWindow.addActuator("Swing Arm", "Solenoids", solenoids);
         
         autonomousSwitch1 = new DigitalInput(21);
         LiveWindow.addSensor("Autonomous Switches", "Switch #1", (DigitalInput) autonomousSwitch1);
