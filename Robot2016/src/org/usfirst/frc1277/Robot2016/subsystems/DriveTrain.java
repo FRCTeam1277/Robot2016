@@ -14,15 +14,11 @@ package org.usfirst.frc1277.Robot2016.subsystems;
 import org.usfirst.frc1277.Robot2016.RobotMap;
 import org.usfirst.frc1277.Robot2016.commands.Drive;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-import edu.wpi.first.wpilibj.CameraServer;
 
 
 /**
@@ -37,21 +33,13 @@ public class DriveTrain extends Subsystem {
     
     public final double circumference = Math.PI * 10;
     
-	public final int camBack;
-	public final int camFront;
-	public int curCam;
-	public Image frame;
-	public CameraServer server;
+//	public final int camBack;
+	//public CameraServer server;
     
-	public DriveTrain() {
-		
-        camBack = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        camFront = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        curCam = camFront;
-        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-        server = CameraServer.getInstance();
-        server.setQuality(60);
-        changeCam(camFront);
+	public DriveTrain() {		
+        //server = CameraServer.getInstance();
+        //server.setQuality(60);
+        //server.startAutomaticCapture("cam1");
 	}
 	
     public int getRightEncoder() {
@@ -71,19 +59,6 @@ public class DriveTrain extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new Drive());
     }
-    
-	public void changeCam(int newId) {
-		
-		NIVision.IMAQdxStopAcquisition(curCam);
-    	NIVision.IMAQdxConfigureGrab(newId);
-    	NIVision.IMAQdxStartAcquisition(newId);
-    	curCam = newId;
-    }
-	
-    public void updateCam() {
-    	
-    	NIVision.IMAQdxGrab(curCam, frame, 1);
-        server.setImage(frame);
-    }
+   
 }
 

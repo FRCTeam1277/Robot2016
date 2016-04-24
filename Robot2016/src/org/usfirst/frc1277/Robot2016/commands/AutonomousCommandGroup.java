@@ -40,14 +40,10 @@ public class AutonomousCommandGroup extends CommandGroup {
         	//addSequential(new ResetElbow());
         	// addSequential(new ResetShoulder());
         	// Run this for at most 5 seconds - handles case when encoder browns out
-        	addSequential(new DriveDistance(132), 5); 
+        	addSequential(new DriveDistance(132), 4); 
     	} else if (!switch1.get() && switch2.get()) {
-        	//addSequential(new ResetSwingArm());
-        	//addSequential(new DriveDistance(39));
-        	//addSequential(new MoveArm(770));
-        	//addSequential(new DriveDistance(24));
-        	//addParallel(new DriveDistance(96));
-        	//addParallel(new ResetSwingArm());
+        	addSequential(new SetSolenoidsTrue());
+        	addSequential(new DriveDistance(132), 4); 
     	}
     	
     }

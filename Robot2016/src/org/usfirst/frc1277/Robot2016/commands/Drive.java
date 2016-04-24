@@ -76,13 +76,7 @@ public class Drive extends Command {
     	}
     	if (current12 && !previous12) {
     		reversed = !reversed;
-    		if (reversed) {
-    			Robot.driveTrain.changeCam(Robot.driveTrain.camBack);
-    		} else {
-    			Robot.driveTrain.changeCam(Robot.driveTrain.camFront);
-    		}
     	}
-    	Robot.driveTrain.updateCam();
     	if (reversed) {
     		Robot.driveTrain.drive(sensitivity * OI.getJoystick().getRawAxis(1), -sensitivity * OI.getJoystick().getRawAxis(0));
     	} else if (!reversed) {

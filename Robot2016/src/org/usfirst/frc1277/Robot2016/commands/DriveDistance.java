@@ -13,10 +13,10 @@ public class DriveDistance extends Command {
 	
     public DriveDistance(double distance) {
     	
-    	count = (distance / Robot.driveTrain.circumference) * 240;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
+    	count = (distance / Robot.driveTrain.circumference) * 240;
     	Robot.driveTrain.resetRightEncoder();
     }
 
